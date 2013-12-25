@@ -20,9 +20,9 @@ public class myParser {
 		
 		Parser parser = null;
 		if (fileURL.endsWith("pdf")) {
-			 parser = new PDFParser();// ����PDF�ĵ�
+			 parser = new PDFParser();
 		}else if(fileURL.endsWith("doc")){
-			parser = new OfficeParser();//����΢���ʽ�ĵ�
+			parser = new OfficeParser();
 		}else if(fileURL.endsWith("docx")){
 			parser =new OOXMLParser();
 		}
@@ -34,20 +34,15 @@ public class myParser {
 			}
 		
 		InputStream iStream = new BufferedInputStream(new FileInputStream(
-				new File(fileURL)));// ����������
-		// OutputStream oStream = new BufferedOutputStream(new
-		// FileOutputStream(new File(OUTPATH)));//���������
+				new File(fileURL)));
 
-		// ���涨�����ݴ�����
-		// ContentHandler iHandler = new BodyContentHandler(oStream);
-		// ContentHandler iHandler = new BodyContentHandler(System.out);
 		ContentHandler iHandler = new BodyContentHandler();
 		Metadata meta = new Metadata();
 		meta.add(Metadata.CONTENT_ENCODING, "utf-8");
-		parser.parse(iStream, iHandler, meta, new ParseContext());// ����
+		parser.parse(iStream, iHandler, meta, new ParseContext());
 
-		// ����������������������ķ�ʽ��ֱ����������л�ý������
 		System.out.println(iHandler.toString());
+		
 		return iHandler.toString();
 	}
 }
