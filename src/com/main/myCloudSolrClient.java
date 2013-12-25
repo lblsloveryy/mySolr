@@ -74,8 +74,8 @@ public class myCloudSolrClient {
 //	}
 
 	public static void main(String[] args) {
-		final String zkHost = "172.16.206.17:2181";
-	//	final String zkHost="localhost:2181";
+	//	final String zkHost = "172.16.206.17:2181";
+		final String zkHost="localhost:2181";
 		final String defaultCollection = "mycollection2";
 		final int zkClientTimeout = 20000;
 		final int zkConnectTimeout = 1000;
@@ -102,6 +102,7 @@ public class myCloudSolrClient {
 		String area = " �ص�";
 		client.addDoc(id, myare, buidingType, "���", buidingType, "code",
 				latitude, latitude, area);
+		System.out.println("Finish!");
 
 	}
 
