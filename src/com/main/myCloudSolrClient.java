@@ -59,11 +59,23 @@ public class myCloudSolrClient {
 
 	}
 
-
+//	public void query() {
+//		SolrParams params = new SolrQuery("id:1");
+//		try {
+//			QueryResponse response = cloudSolrServer.query(params);
+//			SolrDocumentList list = response.getResults();
+//			for (int i = 0; i < list.size(); i++) {
+//				SolrDocument doc = list.get(i);
+//				System.out.println(doc);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public static void main(String[] args) {
-	//	final String zkHost = "172.16.206.17:2181";
-		final String zkHost="localhost:2181";
+		final String zkHost = "172.16.206.17:2181";
+	//	final String zkHost="localhost:2181";
 		final String defaultCollection = "mycollection2";
 		final int zkClientTimeout = 20000;
 		final int zkConnectTimeout = 1000;
@@ -90,7 +102,6 @@ public class myCloudSolrClient {
 		String area = " �ص�";
 		client.addDoc(id, myare, buidingType, "���", buidingType, "code",
 				latitude, latitude, area);
-		System.out.println("finish!");
 
 	}
 
