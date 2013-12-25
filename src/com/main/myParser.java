@@ -28,7 +28,10 @@ public class myParser {
 		}
    
 		if(parser==null)
+		{
+			System.out.println("couldn't analyse");
 			return "";
+			}
 		
 		InputStream iStream = new BufferedInputStream(new FileInputStream(
 				new File(fileURL)));// ����������
