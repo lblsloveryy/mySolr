@@ -29,7 +29,7 @@ public class myParser {
    
 		if(parser==null)
 		{
-			System.out.println("couldn't analyse");
+			System.out.println("couldn't analyse");//TEST
 			return "";
 			}
 		
