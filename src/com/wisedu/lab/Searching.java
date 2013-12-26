@@ -36,9 +36,9 @@ public class Searching {
 		System.out.println(o);
 	}
 	
-	public String query() {//String query
+	public String query(String query) {
 		String result="";
-		SolrParams params = new SolrQuery("area:部门");//area:部门
+		SolrParams params = new SolrQuery(query);
 		try {
 			QueryResponse response = cloudSolrServer.query(params);
 			SolrDocumentList list = response.getResults();
@@ -57,22 +57,22 @@ public class Searching {
           
          Searching client = new Searching();
          
-         final String zkHost = "172.16.206.32:2181";           
+         final String zkHost = "localhost:2181";           
          final String  defaultCollection = "mycollection2";  
          final int zkClientTimeout = 20000;  
          final int zkConnectTimeout = 1000;  
 
          client.open(zkHost, defaultCollection, zkClientTimeout, zkConnectTimeout);
          
-// 		if(args==null||args.length<2){
-// 			System.out.println("Parameter error!");
-// 		}
-// 		else
-// 		{
-// 			String field=args[0];
-// 			String keyword=args[1];
- 			System.out.println(client.query());//field+":"+keyword
+ 		if(args==null||args.length<2){
+ 			System.out.println("Parameter error!");
+ 		}
+ 		else
+ 		{
+ 			String field=args[0];
+ 			String keyword=args[1];
+ 			System.out.println(client.query(field+":"+keyword));//
  			System.out.println("finish!");
-// 		}
+ 		}
     }
 }
