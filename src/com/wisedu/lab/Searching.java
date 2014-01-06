@@ -36,9 +36,9 @@ public class Searching {
 		System.out.println(o);
 	}
 	
-	public String query(String query) {
+	public String query(String query) {//
 		String result="";
-		SolrParams params = new SolrQuery(query);
+		SolrParams params = new SolrQuery(query);//"category:建筑"
 		try {
 			QueryResponse response = cloudSolrServer.query(params);
 			SolrDocumentList list = response.getResults();
@@ -71,7 +71,7 @@ public class Searching {
  		{
  			String field=args[0];
  			String keyword=args[1];
- 			System.out.println(client.query(field+":"+keyword));//
+ 			System.out.println(client.query(field+":"+keyword));//field+":"+keyword
  			System.out.println("finish!");
  		}
     }

@@ -2,7 +2,6 @@ package com.main;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.common.SolrInputDocument;
