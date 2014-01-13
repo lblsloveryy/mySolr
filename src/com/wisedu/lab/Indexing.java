@@ -1,13 +1,22 @@
-package com.main;
+/*
+ * Class Indexing
+ * Author: wisedulab
+ * Date: 2014-01-13
+ * Version: 2
+ * Function: index files by three fields(id, content, url) on solrcloud with zookeeper
+ * i use it after packed the project into a fat_jar, so the code includes the process of handling params of main 
+ */
+package com.wisedu.lab;
+
+import com.main.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
-
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.common.SolrInputDocument;
 
 
-public class myCloudSolrClient {
+public class Indexing {
 
 	private CloudSolrServer cloudSolrServer;
 
@@ -20,7 +29,6 @@ public class myCloudSolrClient {
 				cloudSolrServer.setDefaultCollection(defaultCollection);
 				cloudSolrServer.setZkClientTimeout(zkClientTimeout);
 				cloudSolrServer.setZkConnectTimeout(zkConnectTimeout);
-
 			} catch (MalformedURLException e) {
 				System.out
 						.println("The URL of zkHost is not correct!! Its form must as below:\n zkHost:port");
@@ -31,20 +39,13 @@ public class myCloudSolrClient {
 		}
 	}
 
-	public void addDoc(long id, String area, int buildingType, String category,
-			int temperature, String code, double latitude, double longitude,
-			String when) {
+	public void addDoc(long id, String url, String content) {
 		try {
 
 				SolrInputDocument doc = new SolrInputDocument();
 				doc.addField("id", id);
-				doc.addField("area", area);
-				doc.addField("building_type", buildingType);
-				doc.addField("category", category);
-				doc.addField("temperature", temperature);
-				doc.addField("code", code);
-				doc.addField("latitude", latitude);
-				doc.addField("longitude", longitude);
+				doc.addField("url", url);
+				doc.addField("content", content);
 				cloudSolrServer.add(doc);
 		} catch (SolrServerException e) {
 			System.err.println("Add docs Exception !!!");
@@ -58,34 +59,38 @@ public class myCloudSolrClient {
 
 	}
 
-
+	//main funtion
+	//args[0] id type:long
+	//args[1] url type:string
 	public static void main(String[] args) {
 		final String zkHost="localhost:2181";
 		final String defaultCollection = "mycollection2";
 		final int zkClientTimeout = 20000;
 		final int zkConnectTimeout = 1000;
 
-		myCloudSolrClient client = new myCloudSolrClient();
+		Indexing client = new Indexing();
 		client.open(zkHost, defaultCollection, zkClientTimeout,
 				zkConnectTimeout);
-		if(args==null||args.length<1)
+		if(args==null||args.length<2)
 			return ;
 
-		String path=args[0];
-		System.out.println(path);
 		
-		String myare="";
+		//args[0]:id long
+		//args[1]:url string
+		long id = Integer.parseInt(args[0]);
+		String url=args[1];
+		
+		System.out.println(url);
+		
+		String content="";
 		try {
-			myare=myParser.parse(path);
+			content=myParser.parse(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		long id = 2222222;
-		int buidingType = 1;
-		double latitude = 2;
-		String area = " �ص�";
-		client.addDoc(id, myare, buidingType, "���", buidingType, "code",
-				latitude, latitude, area);
+		
+
+		client.addDoc(id, url, content);
 		System.out.println("Finish!");
 
 	}
